@@ -7,6 +7,98 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
+
+        #loader-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--hacker-background);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            color: var(--matrix-green);
+        }
+
+
+        .loader {
+            position: relative;
+            width: 108px;
+            display: flex;
+            justify-content: space-between;
+            padding-bottom: 2em !important
+          }
+          .loader::after , .loader::before  {
+            content: '';
+            display: inline-block;
+            width: 48px;
+            height: 48px;
+            background-color: #FFF;
+            background-image:  radial-gradient(circle 14px, #0d161b 100%, transparent 0);
+            background-repeat: no-repeat;
+            border-radius: 50%;
+            animation: eyeMove 10s infinite , blink 10s infinite;
+          }
+          @keyframes eyeMove {
+            0%  , 10% {     background-position: 0px 0px}
+            13%  , 40% {     background-position: -15px 0px}
+            43%  , 70% {     background-position: 15px 0px}
+            73%  , 90% {     background-position: 0px 15px}
+            93%  , 100% {     background-position: 0px 0px}
+          }
+          @keyframes blink {
+            0%  , 10% , 12% , 20%, 22%, 40%, 42% , 60%, 62%,  70%, 72% , 90%, 92%, 98% , 100%
+            { height: 48px}
+            11% , 21% ,41% , 61% , 71% , 91% , 99%
+            { height: 18px}
+          }
+
+
+
+      /*  .loader {
+            border: 6px solid var(--cyber-blue);
+            border-top: 6px solid var(--matrix-green);
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.5);
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }*/
+
+         .welcome-message {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .enter-button {
+            background-color: var(--cyber-blue);
+            color: var(--deep-black);
+            border: none;
+            padding: 10px 20px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .enter-button:hover {
+            background-color: var(--matrix-green);
+            transform: scale(1.1);
+            box-shadow: 0 0 15px var(--matrix-green);
+        }
+
         :root {
             --matrix-green: #00ff41;
             --cyber-blue: #00e5ff;
@@ -253,7 +345,16 @@
         }
     </style>
 </head>
-<body>
+<body>    
+    <div id="loader-overlay">
+        <!-- <div class="loader"></div> -->
+        <span class="loader"></span>
+        <div class="welcome-message">
+            Welcome to the Saurabh Pal Portfolio
+        </div>
+        <button id="enter-btn" class="enter-button">Enter Secure Zone</button>
+    </div>
+
     <div class="matrix-background"></div>
     <div class="matrix-overlay"></div>
     <div class="circuit-overlay"></div>
@@ -406,5 +507,27 @@
     <footer style="text-align: center; padding: 2rem; background: rgba(0,0,0,0.9); color: var(--cyber-blue);">
         <p>© 2024 Saurabh Pal | Cyber Security Executive</p>
     </footer>
+   <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loaderOverlay = document.getElementById('loader-overlay');
+            const enterButton = document.getElementById('enter-btn');
+
+            // Optional: You can customize the loader behavior
+            enterButton.addEventListener('click', () => {
+                // You can add custom actions here
+                loaderOverlay.style.display = 'none';
+                
+                // If you want to trigger a custom event when entering
+                const event = new Event('cyber-loader-complete');
+                document.dispatchEvent(event);
+            });
+
+            // Optional: Auto-hide loader after some time
+            setTimeout(() => {
+                enterButton.textContent = 'Enter Secure Zone';
+            }, 3000);
+        });
+    </script> 
+
 </body>
 </html>
