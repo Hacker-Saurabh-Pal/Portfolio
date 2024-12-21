@@ -8,6 +8,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
 
+
+        /* Default styling for all devices */
+            .name_header {
+              padding-left: 0;
+            }
+            
+        /* Styling for web/laptop interfaces */
+            @media (min-width: 768px) {
+              .name_header {
+                padding-left: 3em;
+              }
+            }
+
+        
         #loader-overlay {
             position: fixed;
             top: 0;
@@ -364,7 +378,7 @@
             <div class="profile-image-container">
                 <img src="mine.jpg" alt="Cyber Security Professional" class="profile-image">
             </div>
-            <div>
+            <div class="name_header">
                 <div class="glitch-text" data-text="Saurabh Pal">
                     Saurabh Pal
                 </div>
